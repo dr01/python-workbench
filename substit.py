@@ -1,12 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Encrypt or decrypt text with a monoalphabetic substitution cipher
 """
 
 __author__  = "Daniele Raffo"
-__version__ = "0.1"
-__date__    = "20/10/2018"
+__version__ = "0.2"
+__date__    = "2/12/2018"
 
 
 import argparse
@@ -42,13 +42,13 @@ if __name__ == '__main__':
 
     # Verify uniqueness of elements in the key
     if len(key) < n_keys:
-        print('Bad key: replacements ambiguously defined ({} multiple defs)'.format(n_keys - len(key)))
+        print('Bad key: multiple replacement definitions ({}) for the same letter'.format(n_keys - len(key)))
         sys.exit()
 
     # Invert key (to verify that replacements are unique, and for decryption)
     inverted_key = {v: k for k, v in key.items()}
     if len(inverted_key) < len(key):
-        print('Bad key: duplicate replacements exist, key unusable for decryption ({} dupes)'.format(len(key) - len(inverted_key)))
+        print('Bad key: some letters with identical replacements ({} dupes), encryption would produce ambiguous text'.format(len(key) - len(inverted_key)))
         sys.exit() 
 
     # Get input text from given source
@@ -62,6 +62,7 @@ if __name__ == '__main__':
     if args.encrypt:
         output_text = ''.join('{}'.format(key.get(c, c)) for c in input_text.lower())
     elif args.decrypt:
-        output_text = ''.join('{}'.format(inverted_key.get(c, c)) for c in input_text.lower())    
+        output_text = ''.join('{}'.format(inverted_key.get(c, c)) for c in input_text)    
 
     print(output_text)
+
