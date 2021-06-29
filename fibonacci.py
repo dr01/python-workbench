@@ -47,6 +47,6 @@ if __name__ == '__main__':
 
     if args.upto:
         for i, fibonacci in zip(range(1, number + 1), iter_fibonacci()): 
-            print('{:>4}: {:>4}'.format(i, fibonacci))
+            print('{:>4}) {:>4}'.format(i, fibonacci))
     else:
         print(get_fibonacci(number))
