@@ -47,16 +47,16 @@ def run_kaprekar_routine(n):
 
 if __name__ == '__main__':
     args = parse_command_line().parse_args()
-    
+
     if args.nstart:
         number = int(args.nstart)
         if number < 1 or number > 9999:
             print('Error: argument must be a positive 4-digit number')
-            sys.exit()   
+            sys.exit()
         digits = num_to_digitlist(number)
         if digits.count(digits[0]) == len(digits):
             print('Error: digits must not be all the same')
-            sys.exit() 
+            sys.exit()
 
     else:
         while True:
@@ -64,14 +64,8 @@ if __name__ == '__main__':
             digits = num_to_digitlist(number)
             if digits.count(digits[0]) != len(digits):
                 break
-        
+
     while True:
-        number = run_kaprekar_routine(number)        
+        number = run_kaprekar_routine(number)
         if number == 6174:
             break
-        
-        
-        
-        
-        
-    
